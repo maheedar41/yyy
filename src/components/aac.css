@@ -1,0 +1,50 @@
+/* Professional AAC layout styles */
+:root{
+  --aac-bg: #ffffff;
+  --aac-muted: #6b7280;
+  --aac-border: #e6eef0;
+  --aac-accent: #0f766e; /* teal/emerald */
+  --aac-card: #fbfdfe;
+}
+
+.aac-container{
+  font-family: 'Poppins', Inter, Arial, sans-serif;
+  color: #0f172a;
+  padding: 24px;
+}
+
+.aac-standard{ margin-bottom: 20px }
+.aac-standard h3{ font-size:18px; margin:0 0 10px 0; font-weight:700 }
+
+.aac-card{
+  background: var(--aac-card);
+  border: 1px solid var(--aac-border);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 1px 4px rgba(15,23,42,0.03);
+}
+
+.aac-heading{ display:flex; gap:16px; align-items:flex-start; margin-bottom:12px }
+.aac-code{ font-weight:700; width:220px; flex-shrink:0 }
+.aac-desc{ color:var(--aac-muted); line-height:1.45 }
+
+.aac-table-wrap{ overflow-x:auto }
+.aac-table{ width:100%; border-collapse:collapse; background:var(--aac-bg) }
+.aac-table thead th{ text-align:left; padding:12px 10px; font-weight:700; border-bottom:1px solid #eef2f3 }
+.aac-table td{ padding:12px 10px; border-bottom:1px solid #f6f8f9; vertical-align:top }
+
+.aac-select, .aac-input, .aac-file{ padding:8px 10px; border:1px solid var(--aac-border); border-radius:6px; font-size:14px }
+.aac-input{ width:110px }
+.aac-input.full{ width:100% }
+
+.aac-badge{ display:inline-block; padding:6px 10px; border-radius:999px; font-weight:700; font-size:12px }
+.aac-badge.positive{ background:#ecfdf5; color:#065f46 }
+.aac-badge.warning{ background:#fff7ed; color:#92400e }
+.aac-badge.negative{ background:#fff1f2; color:#991b1b }
+
+.aac-final-score{ font-size:20px; font-weight:800; color:var(--aac-accent) }
+
+@media (max-width: 900px){
+  .aac-code{ width:120px }
+  .aac-input{ width:80px }
+}

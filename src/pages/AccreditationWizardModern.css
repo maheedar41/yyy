@@ -1,0 +1,353 @@
+/*
+ * Styles for the modernised accreditation wizard.
+ *
+ * This stylesheet defines a clean and contemporary look using a
+ * restrained colour palette, generous spacing and subtle
+ * transitions. It is mobile‑friendly out of the box thanks to
+ * responsive layouts and flexible grids.
+ */
+
+/* Colour variables for easy theming */
+:root {
+  --primary: #4f46e5; /* indigo-600 */
+  --primary-light: #6366f1; /* indigo-500 */
+  --primary-dark: #4338ca; /* indigo-700 */
+  --secondary: #10b981; /* emerald-500 */
+  --secondary-dark: #059669; /* emerald-600 */
+  --text-primary: #111827; /* gray-900 */
+  --text-secondary: #6b7280; /* gray-500 */
+  --border-colour: #d1d5db; /* gray-300 */
+  --background-light: #f9fafb; /* gray-50 */
+  --surface: #ffffff; /* white */
+  --step-completed: var(--secondary);
+  --step-bg: #e5e7eb; /* gray-200 */
+}
+
+/* Base typography and layout */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI',
+    Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--background-light);
+  color: var(--text-primary);
+  margin: 0;
+  padding: 0;
+}
+
+/* Container around the entire wizard */
+.wizard-container {
+  max-width: 960px;
+  margin: 32px auto;
+  padding: 24px;
+  background-color: var(--surface);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.wizard-heading {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-align: center;
+}
+
+/* Stepper styling */
+.wizard-stepper {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  user-select: none;
+}
+
+.wizard-step {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+  position: relative;
+  transition: background-color 0.2s;
+}
+
+.wizard-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  width: calc(100% - 16px);
+  height: 2px;
+  background-color: var(--border-colour);
+  z-index: 0;
+}
+
+.wizard-step-number {
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 2px solid var(--border-colour);
+  background-color: var(--surface);
+  color: var(--text-secondary);
+  margin-bottom: 6px;
+  transition: all 0.3s;
+}
+
+.wizard-step-title {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  text-align: center;
+}
+
+/* Active and completed step states */
+.wizard-step.active .wizard-step-number {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.wizard-step.completed .wizard-step-number {
+  background-color: var(--step-completed);
+  border-color: var(--step-completed);
+  color: #fff;
+}
+
+.wizard-step.active .wizard-step-title,
+.wizard-step.completed .wizard-step-title {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.wizard-step:hover .wizard-step-number {
+  border-color: var(--primary);
+}
+
+/* Panel area */
+.wizard-panel {
+  background-color: var(--surface);
+  padding: 16px;
+  border-radius: 8px;
+}
+
+.panel-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Cards used in the final details section */
+.section-card {
+  background-color: var(--background-light);
+  border: 1px solid var(--border-colour);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.section-heading {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.section-subtext {
+  margin-top: -8px;
+  margin-bottom: 12px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.panel-heading {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+
+/* Form elements */
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 4px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  border: 1px solid var(--border-colour);
+  border-radius: 6px;
+  background-color: var(--surface);
+  color: var(--text-primary);
+  transition: border-color 0.2s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(79, 70, 229, 0.2);
+}
+
+.textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Scope grid styling */
+.scope-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.scope-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+.scope-item input {
+  transform: scale(1.1);
+  margin-right: 4px;
+}
+
+/* Inline grouping for location inputs */
+.inline-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-label {
+  min-width: 140px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+/* Photo previews */
+.photo-preview {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.img-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.img-item img {
+  width: 96px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.img-caption {
+  text-align: center;
+}
+
+/* SPOC photo preview */
+.spoc-preview {
+  margin-top: 8px;
+}
+
+.spoc-preview img {
+  width: 120px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styling */
+.btn-primary,
+.btn-secondary {
+  padding: 10px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s, box-shadow 0.2s;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+  color: #fff;
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary-dark);
+}
+
+/* Action buttons */
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* Navigation buttons (Back/Next) */
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+
+/* Make inputs full width on smaller screens */
+@media (max-width: 600px) {
+  .inline-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .status-label {
+    margin-top: 4px;
+  }
+  .wizard-stepper {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .wizard-step:not(:last-child)::after {
+    content: none;
+  }
+  .wizard-step {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 12px;
+  }
+  .wizard-step-number {
+    margin-bottom: 0;
+  }
+}

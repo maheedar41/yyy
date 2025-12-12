@@ -1,0 +1,382 @@
+/* ================================
+   ✅ GLOBAL STYLES (UPDATED)
+   Fixes:
+   1) @import MUST be at top (font loads reliably)
+   2) Tailwind directives near top
+   3) Keep ALL your previous styles (unchanged)
+   4) Small safe improvements: font fallback + smoother rendering
+================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --sidebar-width:320px;
+  --sidebar-bg:#f7fbff;
+  --primary:#2f7be2;
+  --accent:#4c8bf5;
+  --muted:#6b7685;
+  --card:#ffffff;
+  --muted-bg:#f1f5f9;
+}
+
+*{box-sizing:border-box}
+body,html,#root{
+  height:100%;
+  margin:0;
+  font-family:'Poppins', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size:14px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+.app-root{display:flex;min-height:100vh}
+.sidenav{width:var(--sidebar-width);background:var(--sidebar-bg);border-right:1px solid rgba(15,23,42,0.06);box-shadow:0 1px 0 rgba(15,23,42,0.03) inset}
+.mat-drawer-inner-container{height:100%}
+.sidebar{display:flex;flex-direction:column;height:100%}
+.sidebar-content{padding:20px;display:flex;flex-direction:column;flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+
+/* Custom scrollbar: subtle thin thumb for modern, clean look */
+/* WebKit browsers (Chrome, Edge, Safari) */
+.sidebar-content::-webkit-scrollbar{width:8px}
+.sidebar-content::-webkit-scrollbar-track{background:transparent}
+.sidebar-content::-webkit-scrollbar-thumb{background:rgba(15,23,42,0.06);border-radius:8px}
+.sidebar-content::-webkit-scrollbar-thumb:hover{background:rgba(15,23,42,0.10)}
+
+/* Firefox */
+.sidebar-content{scrollbar-width:thin;scrollbar-color:rgba(15,23,42,0.06) transparent}
+
+/* Provide a slightly visible rail on hover for discoverability */
+.sidenav:hover .sidebar-content::-webkit-scrollbar-track{background:rgba(15,23,42,0.01)}
+.sidenav:hover .sidebar-content{scrollbar-color:rgba(15,23,42,0.08) transparent}
+.sidebar-header{display:flex;align-items:center;justify-content:center;padding-bottom:8px;border-bottom:1px solid rgba(15,23,42,0.04);margin-bottom:10px}
+.logo img{display:block}
+/* Text-based logo for Medrank (simplified) */
+.logo{display:flex;align-items:center;text-decoration:none;color:var(--primary)}
+.logo-text{font-size:18px;color:var(--primary);font-weight:700}
+.sidebar-profile{display:flex;gap:12px;align-items:center;padding:14px 0}
+.user-pic{width:48px;height:48px;border-radius:999px;background:#9b84d9;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;box-shadow:0 2px 6px rgba(16,24,40,0.06)}
+.user-info{display:flex;flex-direction:column}
+.user-info .user-name{display:block;font-weight:700}
+.user-status{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}
+.status-dot{width:10px;height:10px;background:#34d399;border-radius:999px;display:inline-block}
+.sidebar-search{margin:12px 0}
+.input-group{display:flex}
+.search-menu{flex:1;padding:14px;border-radius:8px;border:0;background:var(--primary);color:#fff;box-shadow:0 2px 8px rgba(47,123,226,0.12)}
+.input-group-append{display:flex;align-items:center;padding-left:8px}
+.input-group-append .search-button{background:#fff;border-radius:8px;padding:8px;display:flex;align-items:center;justify-content:center}
+.sidebar-menu ul{list-style:none;padding:0;margin:8px 0;overflow:auto}
+.sidebar-menu li{padding:6px 0;border-radius:4px}
+.sidebar-menu li a{display:flex;gap:8px;align-items:center;color:#1f2933;text-decoration:none}
+.header-menu{padding:12px 6px 6px 6px;font-size:13px;color:#111827;font-weight:800}
+
+/* Menu header (accordion trigger) */
+.menu-header{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:6px;background:var(--muted-bg);cursor:pointer;margin:6px 0}
+.menu-header:hover{background:#e9f2ff}
+.menu-icon-box{width:40px;height:40px;border-radius:8px;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;margin-right:12px}
+.menu-title{font-size:15px}
+.chev{transition:transform .2s ease;color:var(--muted)}
+.chev.open{transform:rotate(180deg)}
+
+/* Collapsible submenu */
+.sidebar-submenu{overflow:hidden;max-height:0;transition:max-height .28s ease;border-radius:4px}
+.sidebar-submenu.open{max-height:600px}
+.submenu{list-style:none;padding:0;margin:0}
+.submenu-item{padding:10px 0}
+.submenu-link{display:flex;align-items:center;gap:12px;padding-left:58px;color:#111827;text-decoration:none}
+.submenu-link:hover{background:rgba(47,123,226,0.04);border-radius:6px}
+.submenu-icon{width:36px;height:36px;border-radius:6px;background:#eef6ff;color:#2b5bb3;display:flex;align-items:center;justify-content:center}
+.submenu-text{font-size:15px}
+.submenu-active{background:rgba(47,123,226,0.08);border-left:3px solid var(--primary);padding-left:54px}
+
+.sidebar-footer{display:flex;padding:8px;border-top:1px solid rgba(15,23,42,0.04);justify-content:space-around}
+.footer-item{display:flex;align-items:center;justify-content:center}
+.main-content{flex:1;padding:24px 32px;min-height:100vh}
+.material-symbols-outlined{font-variation-settings: 'FILL' 0, 'wght' 400}
+.badge-sonar{width:12px;height:12px;background:#ff4d4f;border-radius:50%;display:inline-block;margin-left:6px;box-shadow:0 0 0 3px rgba(255,77,79,0.06)}
+
+/* Bottom bar across entire app */
+/* top-right notification and chat */
+.top-right-actions{position:absolute;right:28px;top:18px;display:flex;gap:12px;z-index:60}
+.notif-btn,.chat-toggle{background:transparent;border:0;color:var(--muted);padding:6px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.notif-btn{position:relative}
+.notif-btn .material-symbols-outlined{font-size:30px;color:var(--primary);line-height:1}
+
+/* Bottom bar / topbar notification bell SVG sizing */
+.bottom-bar{display:flex;align-items:center}
+.bottom-icon{display:inline-flex;align-items:center;justify-content:center;position:relative}
+.notif-bell{width:26px;height:26px;color:#111}
+.bottom-icon .notif-bell{width:26px;height:26px;color:#111}
+.bottom-icon .badge-sonar{position:absolute;top:-4px;right:-6px}
+.top-right-actions .badge-sonar{position:absolute;top:-6px;right:-10px}
+.notif-dot{position:absolute;top:6px;right:6px;width:10px;height:10px;background:#ff4d4f;border-radius:999px;box-shadow:0 0 0 4px rgba(255,77,79,0.08)}
+.chat-toggle .material-symbols-outlined{font-size:22px;color:var(--primary)}
+
+.notif-popover{position:absolute;right:28px;top:62px;background:#fff;border-radius:8px;box-shadow:0 12px 30px rgba(16,24,40,0.12);padding:10px;min-width:220px;z-index:70}
+.notif-item{padding:8px;border-bottom:1px solid rgba(15,23,42,0.04);font-size:14px;color:#111}
+.notif-item:last-child{border-bottom:0}
+
+/* Responsive tweak */
+@media (max-width:900px){
+  .sidenav{width:100%;position:relative}
+  .app-root{flex-direction:column}
+  .main-content{padding-bottom:88px}
+}
+
+/* Responsive & touch-friendly form rules for mobile */
+.standards-grid{padding:12px}
+.standards-grid input,.standards-grid select,.standards-grid textarea{width:100%;max-width:100%;box-sizing:border-box}
+.standards-grid input[type="file"]{width:auto}
+.standards-grid button{min-height:40px;padding:10px 12px}
+
+/* make form inputs and buttons easier to tap on small screens */
+input,select,textarea,button{font-size:15px}
+
+@media (max-width:700px){
+  /* reduce global padding to fit mobile viewports */
+  .main-content{padding:12px}
+  .standards-grid{padding:8px}
+  .sidebar{display:none}
+  .sidenav{display:none}
+  /* ensure sticky tabs don't cover content on small screens */
+  .accreditation-view div[style*="position: sticky"]{position:sticky;top:0}
+}
+
+/* Form-friendly default inputs inside other components */
+input[type="text"], input[type="number"], select, textarea { width:100%; max-width:100%; box-sizing:border-box; padding:10px; border-radius:8px; border:1px solid rgba(15,23,42,0.06) }
+button{cursor:pointer}
+
+/* Fix: remove unexpected decorative pseudo-elements or heavy shadows under tabs/buttons in accreditation view */
+.accreditation-view button, .accreditation-view button::before, .accreditation-view button::after {
+  box-shadow: none !important;
+  background-image: none !important;
+  -webkit-box-shadow: none !important;
+  -webkit-filter: none !important;
+  filter: none !important;
+}
+.accreditation-view [role="tab"], .accreditation-view .tab {
+  box-shadow: none !important;
+}
+
+/* Remove any stray pseudo-element bars under tabs that may be coming from other styles */
+.accreditation-view [class*="-tab"]::after, .accreditation-view [class*="-tab"]::before {
+  display: none !important;
+  content: none !important;
+}
+
+/* Clean, consistent tab styles for accreditation view */
+.accreditation-view .acc-tab{ 
+  padding: 8px 14px; 
+  border: none; 
+  background: transparent; 
+  cursor: pointer; 
+  font-size: 15px; 
+  font-family: 'Poppins', Arial, sans-serif; 
+  color: #0f172a; 
+  border-radius: 8px; 
+  transition: all 140ms ease-in-out; 
+  display: inline-flex; 
+  align-items: center; 
+  gap: 8px;
+  outline: none;
+}
+.accreditation-view .acc-tab .acc-tab-badge{ background: transparent; color: #dc2626; font-size: 13px; margin-left: 6px }
+
+/* active appearance (single source of truth) */
+.accreditation-view .acc-tab.active{ 
+  background: #eef6f7; 
+  box-shadow: none; 
+  border-bottom: 3px solid #0ea5a4; 
+  font-weight: 700; 
+}
+
+/* remove any inline shadow that may be applied on click */
+.accreditation-view .acc-tab:active{ box-shadow: none; }
+
+/* Accessible focus style */
+.accreditation-view .acc-tab:focus{ 
+  box-shadow: 0 0 0 4px rgba(14,165,164,0.12); 
+  border-radius: 8px; 
+}
+
+/* Ensure sticky header tabs don't get odd decoration */
+.accreditation-view [style*="position: sticky"] .acc-tab{ background: transparent }
+
+/* Home page centered content and shortcuts */
+.home-root{display:flex;align-items:flex-start;justify-content:center;padding:36px 24px}
+.home-center{max-width:920px;width:100%;text-align:center;padding-top:20px}
+.home-logo{font-size:46px;color:var(--primary);font-weight:800}
+.home-sub{color:var(--primary);font-style:italic;margin-bottom:18px}
+.home-search{display:flex;align-items:center;justify-content:center;margin:18px auto 28px;max-width:720px}
+.home-search .search-menu{flex:1;padding:14px;border-radius:8px;border:1px solid rgba(15,23,42,0.10);background:#fff;color:#111;box-shadow:0 4px 12px rgba(16,24,40,0.04);transition:box-shadow .15s ease,border-color .15s ease}
+.home-search .search-button{margin-left:8px;background:transparent;border:0;padding:8px;border-radius:8px}
+
+.shortcuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:28px;align-items:start;justify-items:center;margin-top:8px}
+.shortcut{display:flex;flex-direction:column;align-items:center;text-decoration:none;color:var(--muted);width:120px}
+.shortcut-icon{width:72px;height:72px;border-radius:999px;background:#fff;border:1px solid rgba(15,23,42,0.06);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(16,24,40,0.03);transition:transform .18s ease,box-shadow .18s ease}
+.shortcut-icon .material-symbols-outlined{font-size:26px;color:#111}
+.shortcut-title{font-size:13px;margin-top:10px;color:#6b7685}
+.shortcut:hover .shortcut-icon{transform:translateY(-6px);box-shadow:0 18px 40px rgba(16,24,40,0.12)}
+
+/* Notification animations */
+@keyframes pulse {
+  0%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,77,79,0.18)}
+  70%{transform:scale(1.08);box-shadow:0 0 0 8px rgba(255,77,79,0.06)}
+  100%{transform:scale(1);box-shadow:0 0 0 0 rgba(255,77,79,0)}
+}
+
+.badge-sonar.pulse{animation:pulse 1.1s ease-in-out infinite}
+
+@keyframes bell-shake {
+  0%{transform:translateX(0) rotate(0deg)}
+  10%{transform:translateX(-2px) rotate(-8deg)}
+  30%{transform:translateX(2px) rotate(8deg)}
+  50%{transform:translateX(-2px) rotate(-6deg)}
+  70%{transform:translateX(2px) rotate(6deg)}
+  100%{transform:translateX(0) rotate(0deg)}
+}
+
+.notif-bell.shake{animation:bell-shake 0.8s ease-in-out;transform-origin:center}
+
+/* Utility: add pulse to the badge and shake to bell via JS when notifications arrive */
+.badge-sonar{transition:transform .12s ease}
+
+/* Chat widget (WhatsApp-like bubble + panel) */
+.chat-widget{position:fixed;right:20px;bottom:20px;width:320px;max-height:420px;background:#fff;border-radius:12px;box-shadow:0 18px 40px rgba(16,24,40,0.12);overflow:hidden;transform:translateY(20px) scale(.98);opacity:0;pointer-events:none;transition:all .2s ease;z-index:80}
+.chat-widget.open{transform:translateY(0) scale(1);opacity:1;pointer-events:auto}
+.chat-header{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(15,23,42,0.04);background:linear-gradient(90deg,rgba(47,123,226,0.06),transparent)}
+.chat-close{border:0;background:transparent;cursor:pointer}
+.chat-messages{padding:12px;display:flex;flex-direction:column;gap:8px;max-height:260px;overflow:auto}
+.msg{padding:8px 12px;border-radius:10px;max-width:80%;font-size:14px}
+.from-them{background:#f3f4f6;align-self:flex-start}
+.from-me{background:var(--primary);color:#fff;align-self:flex-end}
+.chat-input{display:flex;padding:10px;border-top:1px solid rgba(15,23,42,0.04);gap:8px}
+.chat-input input{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(15,23,42,0.06)}
+.chat-input button{background:var(--primary);color:#fff;border:0;padding:8px 12px;border-radius:8px}
+
+/* Login page styles (two-column) */
+.login-root{display:flex;min-height:100vh}
+.login-left{width:38%;padding:48px 56px;display:flex;flex-direction:column;gap:18px}
+.login-logo{font-weight:700;color:var(--primary);font-size:26px;margin-bottom:8px;text-decoration:none}
+.login-form{max-width:380px}
+.login-form .lbl{display:block;font-size:13px;color:#374151;margin-bottom:6px}
+.input-with-icon{margin-bottom:14px}
+.input-with-icon input{width:100%;padding:14px;border-radius:6px;border:1px solid rgba(15,23,42,0.06);background:#f8fbff}
+.form-actions{display:flex;gap:12px;margin-top:8px}
+.btn{padding:10px 14px;border-radius:8px;border:0;cursor:pointer}
+.btn.primary{background:linear-gradient(90deg,var(--primary),var(--accent));color:#fff}
+.btn.outline{background:#fff;border:1px solid rgba(15,23,42,0.06);color:#111}
+.form-error{color:#ff4d4f;margin-top:6px}
+
+.login-right{flex:1;display:flex;align-items:center;justify-content:center;padding:48px}
+.login-right svg{max-width:92%;height:auto}
+
+@media (max-width:900px){
+  .login-root{flex-direction:column}
+  .login-left{width:100%;padding:24px}
+  .login-right{display:none}
+}
+
+/* Floating message button (bottom-right) */
+.floating-msg{position:fixed;right:20px;bottom:20px;width:56px;height:56px;border-radius:999px;background:linear-gradient(180deg,var(--accent),var(--primary));color:#fff;border:0;display:flex;align-items:center;justify-content:center;box-shadow:0 18px 40px rgba(16,24,40,0.12);z-index:110;cursor:pointer;transition:transform .12s ease,box-shadow .12s ease}
+.floating-msg:hover{transform:translateY(-4px);box-shadow:0 28px 60px rgba(16,24,40,0.16)}
+.floating-msg .msg-icon{width:28px;height:28px;color:#fff}
+.floating-msg .msg-icon path{fill:currentColor}
+.floating-msg .msg-badge{position:absolute;top:10px;right:10px;width:10px;height:10px;background:#34d399;border-radius:999px;box-shadow:0 0 0 6px rgba(52,211,153,0.06)}
+
+/* When new message arrives you can add classes `.pulse` to badge and `.shake` to icon */
+.msg-badge.pulse{animation:pulse 1.1s ease-in-out infinite}
+.msg-icon.shake{animation:bell-shake 0.8s ease-in-out;transform-origin:center}
+
+/* StandardsGrid component styles */
+.std-section{margin-bottom:28px}
+.std-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;cursor:pointer}
+.std-title{font-size:16px;font-weight:800;color:#0F172A}
+.std-count{font-size:13px;color:#6B7280}
+.std-caret{transition:transform 160ms ease;color:#9CA3AF;font-size:22px}
+.std-caret.open{transform:rotate(90deg);color:#6B7280}
+
+.std-card{border:1px solid #E5E7EB;border-radius:10px;margin-bottom:12px;overflow:hidden;background:#fff}
+.std-card-head{display:flex;justify-content:space-between;align-items:flex-start;padding:12px;background:#F9FAFB;border-bottom:1px solid #F1F5F9}
+.std-head-left{display:flex;gap:10px;align-items:center}
+.std-code{padding:4px 10px;border-radius:999px;background:#EFF6FF;border:1px solid #DBEAFE;font-weight:700;font-size:12px;color:#1D4ED8}
+.std-desc{font-size:14px;font-weight:600;color:#334155;line-height:20px}
+.std-final{min-width:160px;text-align:right}
+.final-label{font-size:12px;font-weight:700;color:#6B7280}
+.final-value{font-size:22px;font-weight:900;color:#005EA7;margin-top:6px}
+.final-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:8px}
+.btn-fc{border:1px solid #F59E0B;background:#FEF3C7;color:#92400E;font-weight:900;border-radius:10px;padding:8px 10px;cursor:pointer}
+
+.std-grid{max-height:360px;overflow-y:auto;padding:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}
+.assessor-card{border:1px solid #E5E7EB;border-radius:8px;padding:10px;background:#FAFAFA;display:flex;flex-direction:column;gap:8px}
+.assessor-title{font-size:15px;font-weight:800;color:#005EA7}
+.form-label{font-size:12px;font-weight:700;color:#6B7280;margin-bottom:6px}
+.form-control{padding:8px 10px;border-radius:8px;border:1px solid #D1D5DB;background:#fff}
+.file-input{padding:6px}
+.img-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin-top:6px}
+.img-item{border:1px solid #E5E7EB;border-radius:6px;overflow:hidden;text-align:center}
+.img-thumb{width:100%;height:70px;object-fit:cover}
+.img-caption{padding:6px;font-size:11px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Compliance badge variants */
+.compliance-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;font-weight:700;font-size:12px}
+.compliance-badge .cb-dot{width:8px;height:8px;border-radius:50%;opacity:0.8;display:inline-block}
+.compliance-badge.badge-81{background:#E0F5FF;color:#005EA7;border:1px solid #B7DAF5}
+.compliance-badge.badge-81 .cb-dot{background:#005EA7}
+.compliance-badge.badge-61{background:#EBFAFD;color:#0D677C;border:1px solid #CBE9F1}
+.compliance-badge.badge-61 .cb-dot{background:#0D677C}
+.compliance-badge.badge-41{background:#FFF8E7;color:#9A5500;border:1px solid #FFE4B3}
+.compliance-badge.badge-41 .cb-dot{background:#9A5500}
+.compliance-badge.badge-0{background:#FDEAEA;color:#932C2C;border:1px solid #F9CCCC}
+.compliance-badge.badge-0 .cb-dot{background:#932C2C}
+
+/* FC modal */
+.fc-overlay{position:fixed;inset:0;background:rgba(15,23,42,0.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:9999}
+.fc-card{width:min(980px,96vw);background:#fff;border-radius:12px;border:1px solid #E5E7EB;box-shadow:0 20px 60px rgba(0,0,0,0.12);overflow:hidden}
+.fc-header{padding:16px;display:flex;justify-content:space-between;align-items:flex-start;border-bottom:1px solid #F1F5F9;background:#F9FAFB}
+.fc-title{font-size:18px;font-weight:900;color:#0F172A}
+.fc-sub{font-size:13px;margin-top:4px;color:#334155}
+.fc-close{border:none;background:transparent;font-size:22px;font-weight:900;cursor:pointer;color:#334155;line-height:18px}
+.fc-body{padding:16px}
+.fc-section{margin-top:16px}
+.fc-log-title{font-size:13px;font-weight:900;color:#0D9488;margin-bottom:8px}
+.fc-log{border:1px solid #E5E7EB;border-radius:12px;padding:12px;background:#fff}
+.fc-log-row{display:flex;flex-direction:column;gap:6px}
+.fc-log-key{font-weight:700;margin-bottom:6px}
+.fc-docs{display:flex;flex-wrap:wrap;gap:8px}
+.fc-doc{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;background:#ECFDF5;border:1px solid #A7F3D0;color:#065F46;font-size:12px;font-weight:800}
+.fc-footer{display:flex;justify-content:flex-end;gap:10px;margin-top:16px}
+.btn-primary{border:1px solid #1D4ED8;background:#1D4ED8;color:#FFFFFF;font-weight:900;border-radius:10px;padding:10px 14px;cursor:pointer}
+.btn-secondary{border:1px solid #CBD5E1;background:#FFFFFF;color:#0F172A;font-weight:800;border-radius:10px;padding:10px 14px;cursor:pointer}
+
+/* small helpers */
+.textarea{min-height:120px}
+
+/* Wizard stepper styles (modern, professional) */
+.wizard-stepper{display:flex;gap:18px;align-items:center;margin-bottom:18px;flex-wrap:wrap}
+.wizard-step{display:flex;align-items:center;gap:12px;cursor:pointer}
+.wizard-step-number{width:40px;height:40px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-weight:700;color:#6B7280;background:#F3F6FA;border:1px solid rgba(15,23,42,0.04);transition:all 160ms ease}
+.wizard-step-title{font-size:14px;color:#334155}
+.wizard-step.completed .wizard-step-number{background:#E6F0FF;color:#0B61D6;border-color:rgba(11,97,214,0.12)}
+.wizard-step.active .wizard-step-number{background:linear-gradient(180deg,#2f7be2,#4c8bf5);color:#fff;border-color:transparent;box-shadow:0 8px 24px rgba(47,123,226,0.18)}
+.wizard-step.completed .wizard-step-title{color:#6B7280}
+.wizard-step.active .wizard-step-title{color:#0f172a;font-weight:700}
+
+/* connect lines for wide screens */
+@media(min-width:720px){
+  .wizard-stepper{position:relative;padding-left:6px}
+  .wizard-step{position:relative;padding-left:10px}
+  .wizard-step:not(:last-child)::after{content:'';position:absolute;left:56px;top:20px;width:calc(100% - 56px);height:2px;background:linear-gradient(90deg,rgba(15,23,42,0.03),rgba(15,23,42,0.02));z-index:-1}
+}
+
+.wizard-panel{background:#fff;padding:12px;border-radius:12px;border:1px solid rgba(15,23,42,0.04)}
+
+/* Modern, flatter form controls inside wizard */
+.wizard-panel .form-control{padding:8px 10px;border-radius:8px;border:1px solid rgba(15,23,42,0.06);background:#fff}
+.wizard-panel .form-control:focus{box-shadow:0 6px 18px rgba(47,123,226,0.08);border-color:rgba(47,123,226,0.18);outline:none}
+.wizard-panel .form-label{margin-bottom:6px;display:block}
+
+.wizard-stepper .wizard-step:focus{outline:none}
